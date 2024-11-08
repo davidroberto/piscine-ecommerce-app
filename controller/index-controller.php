@@ -7,10 +7,14 @@ $message = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (key_exists('customerName', $_POST)) {
-        $order = new Order($_POST['customerName']);
 
+        try {
+            $order = new Order($_POST['customerName']);
+            $message = 'Commande créée';
+        } catch (Exception $exception) {
+            $message = $exception->getMessage();
+        }
 
-        $message = 'Commande créée';
     }
 }
 

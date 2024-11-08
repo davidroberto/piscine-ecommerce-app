@@ -12,6 +12,11 @@ class Order
 
     public function __construct($customerName)
     {
+
+        if (mb_strlen($customerName) < 3) {
+            throw new Exception('Merci de remplir un nom correct');
+        }
+
         $this->status === 'cart';
         $this->totalPrice = 0;
         $this->customerName = $customerName;
