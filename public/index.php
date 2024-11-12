@@ -13,12 +13,12 @@ $endUri = str_replace('/piscine-ecommerce-app/public/', '', $uri);
 $endUri = trim($endUri, '/');
 
 
+$orderController = new OrderController();
+
 // en fonction de la valeur de $endUri on charge le bon contrôleur
 if ($endUri === "create-order") {
-    $orderController = new OrderController();
     $orderController->createOrder();
 } else if ($endUri === "add-product") {
-    $orderController = new OrderController();
     $orderController->addProduct();
 } else {
     echo "<p>404</p>";
