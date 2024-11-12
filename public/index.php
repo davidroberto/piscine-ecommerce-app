@@ -14,7 +14,9 @@ $endUri = trim($endUri, '/');
 
 
 // en fonction de la valeur de $endUri on charge le bon contrôleur
-if ($endUri === "") {
+if ($endUri === "create-order") {
     $indexController = new IndexController();
     $indexController->index();
+} else {
+    echo "<p>404";
 }
