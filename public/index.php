@@ -18,5 +18,5 @@ if ($endUri === "create-order") {
     $indexController = new IndexController();
     $indexController->index();
 } else {
-    echo "<p>404";
+    echo "<p>404</p>";
 }
