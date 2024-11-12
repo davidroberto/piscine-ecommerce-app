@@ -1,6 +1,7 @@
 <?php
 
 require_once('../controller/OrderController.php');
+require_once('../controller/ErrorController.php');
 
 // récupère l'url actuelle
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -21,5 +22,6 @@ if ($endUri === "create-order") {
 } else if ($endUri === "add-product") {
     $orderController->addProduct();
 } else {
-    echo "<p>404</p>";
+    $errorController = new ErrorController();
+    $errorController->notFound();
 }

@@ -9,19 +9,7 @@
 </head>
 <body>
 
-<p><?php echo $message; ?></p>
-
-<p>Commande numéro : <?php echo $order->getId(); ?></p>
-
-<p>Produits : </p>
-
-<ul>
-    <?php foreach ($order->getProducts() as $product) { ?>
-
-        <li><?php echo $product; ?></li>
-
-     <?php } ?>
-</ul>
+    <h2>Non trouvé</h2>
 
 </body>
 </html>

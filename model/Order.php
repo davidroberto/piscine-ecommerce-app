@@ -17,7 +17,7 @@ class Order
             throw new Exception('Merci de remplir un nom correct');
         }
 
-        $this->status === 'cart';
+        $this->status = 'cart';
         $this->totalPrice = 0;
         $this->customerName = $customerName;
         $this->id = uniqid();
@@ -69,6 +69,20 @@ class Order
         } else {
             throw new Exception("La commande ne peux pas être expédiée. elle n'est pas encore payée");
         }
+    }
+
+    // si je veux lire la valeur des propriétés de mon
+    // objet sans les rendre modifiables
+    // au lieu de mettre la propriété en public
+    // je peux créer une méthode public qui retourne
+    // la valeur de la propriété, sans me permettre de la modifier
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getProducts() {
+        return $this->products;
     }
 }
 
