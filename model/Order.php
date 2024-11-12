@@ -28,6 +28,8 @@ class Order
         if ($this->status === "cart") {
             $this->products[] = "Pringles";
             $this->totalPrice += 3;
+        } else {
+            throw new Exception('La commande ne peut pas être modifiée');
         }
     }
 

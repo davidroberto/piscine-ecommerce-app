@@ -1,6 +1,6 @@
 <?php
 
-require_once('../controller/IndexController.php');
+require_once('../controller/OrderController.php');
 
 // récupère l'url actuelle
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -15,8 +15,11 @@ $endUri = trim($endUri, '/');
 
 // en fonction de la valeur de $endUri on charge le bon contrôleur
 if ($endUri === "create-order") {
-    $indexController = new IndexController();
-    $indexController->index();
+    $orderController = new OrderController();
+    $orderController->createOrder();
+} else if ($endUri === "add-product") {
+    $orderController = new OrderController();
+    $orderController->addProduct();
 } else {
     echo "<p>404</p>";
 }
