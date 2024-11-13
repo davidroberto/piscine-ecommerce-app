@@ -23,6 +23,8 @@ if ($endUri === "create-order") {
     $orderController->addProduct();
 } else if ($endUri === "shipping-address") {
     $orderController->setShippingAddress();
+} else if ($endUri === "pay") {
+        $orderController->pay();
 } else {
     $errorController = new ErrorController();
     $errorController->notFound();

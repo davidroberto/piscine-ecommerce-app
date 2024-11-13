@@ -52,20 +52,12 @@ class Order
     }
 
 
-
-    #[Route('/blog/{id}', 'blog_article', ['id' => '\d+'], ['id' => 1])]
-    public function show($id)
-    {
-        // Code pour afficher l'article
-    }
-
-
     public function pay()
     {
         if ($this->status === "shippingAddressSet" && !empty($this->products)) {
             $this->status = "paid";
         } else {
-            throw new Exception('Vous ne pouvez pas payer, merci de remplir votre adresse d\'abord');
+            throw new Exception('Vous ne pouvez pas payer. Soit la commande est déjà payée, soit vous n\'avez pas rempli l\'adresse');
         }
 
     }

@@ -55,30 +55,64 @@ class OrderController {
 
     public function setShippingAddress() {
 
+        // je créé une instance d'orderRepository
+        // pour pouvoir utiliser ses méthodes
         $orderRepository = new OrderRepository();
+
+        // j'utilise la méthode findOrder du repository
+        // pour récupérer une commande existante
         $order = $orderRepository->findOrder();
 
         $message = null;
 
+        // je vérifie et récupère les données de la requête POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (key_exists('shippingAddress', $_POST)) {
 
+                // j'essaie de modifier ma commande avec l'adresse de livraison
                 try {
                     $order->setShippingAddress($_POST['shippingAddress']);
 
+                    $orderRepository->persistOrder($order);
+
                     $message = "Adresse ajoutée";
 
+                    // si la modification echoue (parce que j'ai une exception
+                    // qui apparait (commande non modifiable etc)
                 } catch (Exception $exception) {
-                  $message = $exception->getMessage();
+                    $message = $exception->getMessage();
                 }
-
 
             }
         }
 
-
         require_once('../view/set-shipping-address-view.php');
+    }
+
+
+    public function pay(){
+
+        $orderRepository = new OrderRepository();
+        $order = $orderRepository->findOrder();
+
+        $message = "";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            try {
+                $order->pay();
+
+                $orderRepository->persistOrder($order);
+                $message = "paiement effectué. On vous livrera un jour. y'a moy";
+
+            } catch (Exception $exception) {
+                $message = $exception->getMessage();
+            }
+
+        }
+
+
+        require_once('../view/pay-view.php');
     }
 
 
