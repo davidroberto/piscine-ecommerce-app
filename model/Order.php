@@ -1,16 +1,19 @@
 <?php
 
 
+declare(strict_types=1);
+
+
 class Order
 {
-    private $id;
-    private $customerName;
-    private $status;
-    private $totalPrice;
-    private $products = [];
-    private $shippingAddress;
+    private string $id;
+    private string $customerName;
+    private string $status;
+    private float $totalPrice;
+    private array $products;
+    private ?string $shippingAddress;
 
-    public function __construct($customerName)
+    public function __construct(string $customerName)
     {
 
         if (mb_strlen($customerName) < 3) {
@@ -21,9 +24,10 @@ class Order
         $this->totalPrice = 0;
         $this->customerName = $customerName;
         $this->id = uniqid();
+        $this->products = [];
     }
 
-    public function addProduct()
+    public function addProduct(): void
     {
         if ($this->status === "cart") {
             $this->products[] = "Pringles";
@@ -33,7 +37,7 @@ class Order
         }
     }
 
-    public function removeProduct()
+    public function removeProduct(): void
     {
         if ($this->status === "cart" && !empty($this->products)) {
             array_pop($this->products);
@@ -41,7 +45,7 @@ class Order
         }
     }
 
-    public function setShippingAddress($shippingAddress)
+    public function setShippingAddress(string $shippingAddress): void
     {
         if ($this->status === "cart") {
             $this->shippingAddress = $shippingAddress;
@@ -52,7 +56,7 @@ class Order
     }
 
 
-    public function pay()
+    public function pay(): void
     {
         if ($this->status === "shippingAddressSet" && !empty($this->products)) {
             $this->status = "paid";
@@ -65,7 +69,7 @@ class Order
     // private or public
 
 
-    public function ship()
+    public function ship(): void
     {
         if ($this->status === 'paid') {
             $this->status = "shipped";
@@ -80,15 +84,15 @@ class Order
     // je peux créer une méthode public qui retourne
     // la valeur de la propriété, sans me permettre de la modifier
 
-    public function getId() {
+    public function getId(): string {
         return $this->id;
     }
 
-    public function getProducts() {
+    public function getProducts(): array {
         return $this->products;
     }
 
-    public function getAddress() {
+    public function getAddress(): string {
         return $this->shippingAddress;
     }
 }

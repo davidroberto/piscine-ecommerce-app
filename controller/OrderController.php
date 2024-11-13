@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 require_once('../model/Order.php');
 require_once('../model/OrderRepository.php');
 
 
 class OrderController {
 
-    public function createOrder() {
+    public function createOrder(): void {
         $message = null;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -30,7 +32,7 @@ class OrderController {
         require_once('../view/create-order-view.php');
     }
 
-    public function addProduct() {
+    public function addProduct(): void {
 
         $message = null;
 
@@ -53,7 +55,7 @@ class OrderController {
 
     }
 
-    public function setShippingAddress() {
+    public function setShippingAddress(): void {
 
         // je créé une instance d'orderRepository
         // pour pouvoir utiliser ses méthodes
@@ -91,7 +93,7 @@ class OrderController {
     }
 
 
-    public function pay(){
+    public function pay(): void {
 
         $orderRepository = new OrderRepository();
         $order = $orderRepository->findOrder();
@@ -110,7 +112,6 @@ class OrderController {
             }
 
         }
-
 
         require_once('../view/pay-view.php');
     }
