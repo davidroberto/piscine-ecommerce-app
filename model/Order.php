@@ -45,9 +45,20 @@ class Order
     {
         if ($this->status === "cart") {
             $this->shippingAddress = $shippingAddress;
-            $this->status === "shippingAddressSet";
+            $this->status = "shippingAddressSet";
+        } else {
+            throw new Exception('Adresse non modifiable');
         }
     }
+
+
+
+    #[Route('/blog/{id}', 'blog_article', ['id' => '\d+'], ['id' => 1])]
+    public function show($id)
+    {
+        // Code pour afficher l'article
+    }
+
 
     public function pay()
     {
@@ -83,6 +94,10 @@ class Order
 
     public function getProducts() {
         return $this->products;
+    }
+
+    public function getAddress() {
+        return $this->shippingAddress;
     }
 }
 

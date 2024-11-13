@@ -21,6 +21,8 @@ if ($endUri === "create-order") {
     $orderController->createOrder();
 } else if ($endUri === "add-product") {
     $orderController->addProduct();
+} else if ($endUri === "shipping-address") {
+    $orderController->setShippingAddress();
 } else {
     $errorController = new ErrorController();
     $errorController->notFound();

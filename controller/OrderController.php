@@ -53,6 +53,34 @@ class OrderController {
 
     }
 
+    public function setShippingAddress() {
+
+        $orderRepository = new OrderRepository();
+        $order = $orderRepository->findOrder();
+
+        $message = null;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if (key_exists('shippingAddress', $_POST)) {
+
+                try {
+                    $order->setShippingAddress($_POST['shippingAddress']);
+
+                    $message = "Adresse ajoutée";
+
+                } catch (Exception $exception) {
+                  $message = $exception->getMessage();
+                }
+
+
+            }
+        }
+
+
+        require_once('../view/set-shipping-address-view.php');
+    }
+
 
 }
 
